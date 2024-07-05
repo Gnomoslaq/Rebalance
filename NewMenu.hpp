@@ -697,7 +697,6 @@ namespace GOTHIC_NAMESPACE
 
 		void MenuItems3()
 		{
-
 			auto UsePermSTR = parser->GetSymbol("UsePermSTR");
 			auto UsePermSTROrc = parser->GetSymbol("UsePermSTROrc");
 			auto UsePermDEX = parser->GetSymbol("UsePermDEX");
@@ -714,7 +713,7 @@ namespace GOTHIC_NAMESPACE
 			auto UseOrcPotion = parser->GetSymbol("UseOrcPotion");
 			auto UseMegaDrink = parser->GetSymbol("UseMegaDrink");
 			auto UseMegaPotionSkill = parser->GetSymbol("UseMegaPotionSkill");
-
+			
 			auto MakePermSTR = parser->GetSymbol("MakePermSTR");
 			auto MakePermDEX = parser->GetSymbol("MakePermDEX");
 			auto MakePermMana = parser->GetSymbol("MakePermMana");
@@ -784,13 +783,6 @@ namespace GOTHIC_NAMESPACE
 			auto msgPotionSkill = zSTRING{ UseMegaPotionSkill->single_intdata };
 			pStatusTexture3->Print(STAT_A_X3, STAT_PLY_Y + (STAT_DY * 12), UseMegaPotionSkill->single_intdata);
 
-
-
-
-
-
-
-
 			screen->PrintCX(7000, pagemsg);
 
 			//pStatusTexture3->Print(STAT_A_X1, STAT_PLY_Y - 1000, pagemsg);
@@ -814,7 +806,7 @@ namespace GOTHIC_NAMESPACE
 				|| !moveAllowed
 				|| player->GetEM()->GetCutsceneMode()
 				|| player->IsUnconscious()
-				|| player->IsDead()
+				//|| player->IsDead()
 				)
 			{
 				return false;
@@ -822,10 +814,6 @@ namespace GOTHIC_NAMESPACE
 
 			return true;
 		}
-
-
-
-
 
 		bool MenuActive;
 
