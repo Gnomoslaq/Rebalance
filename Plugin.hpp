@@ -75,7 +75,6 @@
 		auto stamina = parser->GetSymbol("ATR_STAMINA");
 		auto stamina_max = parser->GetSymbol("ATR_STAMINA_MAX");
 
-
 		if (ShowPrayMessage)
 		{
 			PrayMessage();

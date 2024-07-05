@@ -227,7 +227,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='G2A|Win32'">
     <IncludePath>$(ProgramData)\UnionAPI\union-api;$(ProgramData)\UnionAPI\gothic-api;$(ProjectDir)Gothic_UserAPI;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProgramData)\UnionAPI\union-api;$(ProgramData)\UnionAPI\gothic-api;$(LibraryPath)</LibraryPath>
-    <OutDir>..\..\..\..\..\Program Files %28x86%29\Steam\steamapps\common\Gothic II Rebalance\system\Autorun\</OutDir>
+    <OutDir>..\..\..\..\..\..\Program Files %28x86%29\Steam\steamapps\common\Gothic II Rebalance\system\Autorun</OutDir>
     <TargetName>rebalance</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='G2|Win32'">
