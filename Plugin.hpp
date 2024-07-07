@@ -1,8 +1,10 @@
 ﻿namespace GOTHIC_NAMESPACE
 {
 	static constexpr std::string_view PluginName = "Rebalance";
+	static constexpr std::string_view zUtilities = "ZUTILITIES";
 
 	zSTRING SprintKey;
+	int zUtilitiesbars;
 
 	void ReadSprintBinds()
 	{
@@ -25,9 +27,9 @@
 	{
 		ReadSprintBinds();
 		ShowPray = zoptions->ReadBool(PluginName.data(), "ShowPray", true);
-		StaminaValues = zoptions->ReadInt(PluginName.data(), "StaminaValues", 1);
-		StaminaText = zoptions->ReadBool(PluginName.data(), "StaminaText", 1);
+		BarValues = zoptions->ReadInt(PluginName.data(), "BarValues", 0);
 		ShowPrayMessage = zoptions->ReadBool(PluginName.data(), "ShowPrayMessage", 1);
+		zUtilitiesbars = zoptions->ReadInt(zUtilities.data(), "StatusBarValueMode", 0);
 	}
 
 	void Game_Entry()
@@ -72,6 +74,13 @@
 
 	void Game_Loop()
 	{
+		if (zUtilitiesbars != 0 && BarValues != 0)
+		{
+			screen->PrintCXY("Zdublowane wyświetlanie wartości pasków, wyłącz jedne z nich!");
+		}
+
+
+
 		auto stamina = parser->GetSymbol("ATR_STAMINA");
 		auto stamina_max = parser->GetSymbol("ATR_STAMINA_MAX");
 
@@ -129,7 +138,7 @@
 
 	void Game_Pause()
 	{
-
+		newBar_ClearValue();
 
 	}
 
