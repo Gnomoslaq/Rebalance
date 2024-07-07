@@ -1,16 +1,18 @@
 namespace GOTHIC_NAMESPACE
 {
     bool ShowPray;
-    int StaminaValues;
-    bool StaminaText;
+    int BarValues;
 
-    // pointer to bar (not specified by default)
+    // pointer to bar 
     oCViewStatusBar* staminaBar = NULL;
+    zCView* valueViewStamina;
+    zCView* valueViewHp;
+    zCView* valueViewMana;
+    zCView* valueViewFocus;
+
 
     // Texture of the bar strip
     const zSTRING newBar_bar = "BAR_misc.tga";
-
-
 
     // updating the position and size of the new bar
     void newBar_UpdatePosAndSizes()
@@ -35,89 +37,219 @@ namespace GOTHIC_NAMESPACE
         }
     }
 
+    // clear of text values
+    void newBar_ClearValue()
+    {
+        delete (valueViewStamina); valueViewStamina = 0;
+        delete (valueViewHp); valueViewHp = 0;
+        delete (valueViewMana); valueViewMana = 0;
+        delete (valueViewFocus); valueViewFocus = 0;
+    }
+
     // update of bar values
     void newBar_UpdateValue()
     {
-
         // Bar value and range
-        auto symbol1 = parser->GetSymbol("ATR_STAMINA");
-        auto symbol2 = parser->GetSymbol("ATR_STAMINA_MAX");
+        auto atr_stamina = parser->GetSymbol("ATR_STAMINA");
+        auto atr_stamina_max = parser->GetSymbol("ATR_STAMINA_MAX");
 
-        auto ZombieKilled = parser->GetSymbol("ZombieKilled");
+        auto atr_mana = player->GetAttribute(NPC_ATR_MANA);
+        auto atr_mana_max = player->GetAttribute(NPC_ATR_MANAMAX);
 
-        if (symbol1 && symbol2)
+        auto atr_hp = player->GetAttribute(NPC_ATR_HITPOINTS);
+        auto atr_hp_max = player->GetAttribute(NPC_ATR_HITPOINTSMAX);
+
+
+        if (atr_stamina && atr_stamina_max)
         {
-            staminaBar->SetValue(symbol1->single_intdata);
-            staminaBar->SetMaxRange(0, symbol2->single_intdata * 10);
-            staminaBar->SetRange(0, symbol2->single_intdata * 10);
+            staminaBar->SetValue(atr_stamina->single_intdata);
+            staminaBar->SetMaxRange(0, atr_stamina_max->single_intdata * 10);
+            staminaBar->SetRange(0, atr_stamina_max->single_intdata * 10);
         }
 
-        // Stamina text
+        // Bars value
         if (ogame->GetShowPlayerStatus())
         {
-            if (StaminaValues == 0)
+            if (BarValues == 0)
             {
-
+                newBar_ClearValue();
             }
 
-            if (StaminaValues == 1)
+            if (BarValues == 1)
             {
                 if (!playerHelper.IsBusy() && !playerHelper.OnPause() && player->GetBodyState() != BS_DIVE && staminaBar)
                 {
-                    if (StaminaText == 0)
+                    newBar_ClearValue();
                     {
-                        int x, y;
-                        staminaBar->GetPos(x, y);
-                        y = y - 50 - screen->FontY();
-                        auto msg = zSTRING{ symbol1->single_intdata } + zSTRING{ "/" } + zSTRING{ symbol2->single_intdata * 10 };
-                        auto msglen = screen->FontSize(msg);
-                        x = 4096 - msglen / 2;
-                        // printing
-                        screen->Print(x, y, msg);
-                    }
+                        int xs, ys, xh, yh, xm, ym, xf, yf;
+                        int sx, sy, sx2, sy2, sx3, sy3;
+                        // Stamina
+                        {
+                            staminaBar->GetPos(xs, ys);
+                            ys = ys - 50 - screen->FontY();
+                            auto msgs = zSTRING{ atr_stamina->single_intdata } + zSTRING{ "/" } + zSTRING{ atr_stamina_max->single_intdata * 10 };
+                            auto msglen = screen->FontSize(msgs);
+                            xs = 4096 - msglen / 2;
+                            // printing
+                            screen->Print(xs, ys, msgs);
+                        }
 
-                    if (StaminaText == 1)
-                    {
-                        int x, y;
-                        staminaBar->GetPos(x, y);
-                        y = y - 50 - screen->FontY();
-                        auto msg = zSTRING{ "Wytrzyma³oœæ: " } + zSTRING{ symbol1->single_intdata } + zSTRING{ "/" } + zSTRING{ symbol2->single_intdata * 10 };
-                        auto msglen = screen->FontSize(msg);
-                        x = 4096 - msglen / 2;
-                        // printing
-                        screen->Print(x, y, msg);
-                    }
+                        // Hp
+                        {
+                            ogame->hpBar->GetPos(xh, yh);
+                            ogame->hpBar->GetSize(sx, sy);
+                            yh = yh - 50 - screen->FontY();
+                            auto msgh = zSTRING{ atr_hp } + zSTRING{ "/" } + zSTRING{ atr_hp_max};
+                            auto msglen = screen->FontSize(msgh);
+                            xh = (xh + sx / 2) - msglen / 2;
+                            // printing
+                            screen->Print(xh, yh, msgh);
+                        }
 
+                        // Mana
+                        {
+                            ogame->manaBar->GetPos(xm, ym);
+                            ogame->manaBar->GetSize(sx2, sy2);
+                            ym = ym - 50 - screen->FontY();
+                            auto msgm = zSTRING{ atr_mana } + zSTRING{ "/" } + zSTRING{ atr_mana_max };
+                            auto msglen = screen->FontSize(msgm);
+                            xm = (xm + sx2 / 2) - msglen / 2;
+                            // printing
+                            screen->Print(xm, ym, msgm);
+                        }
+
+                        // Focus
+                        {
+                            if (player->GetFocusNpc() != 0)
+                            {
+                                oCViewStatusBar* focusbar = ogame->focusBar;
+                                focusbar->GetPos(xf, yf);
+                                focusbar->GetSize(sx3, sy3);
+
+                                int focushp = focusbar->currentValue;
+                                int focusmaxhp = focusbar->maxHigh;
+
+                                yf = yf + 50 + screen->FontY();
+                                auto msgf = zSTRING{ focushp } + zSTRING{ "/" } + zSTRING{ focusmaxhp };
+                                auto msglen = screen->FontSize(msgf);
+                                xf = (xf + sx3 / 2) - msglen / 2;
+
+                                valueViewFocus = new zCView(0, 0, 8192, 8192);
+                                screen->InsertItem(valueViewFocus);
+                                valueViewFocus->Print(xf, yf, msgf);
+                                //screen->Print(xf, yf, msgf);
+                            }
+                        }
+                    }
                 }
             }
 
-            if (StaminaValues == 2)
+            if (BarValues == 2)
             {
-                if (StaminaText == 0)
+                if (!playerHelper.IsBusy() && !playerHelper.OnPause() && player->GetBodyState() != BS_DIVE && staminaBar)
                 {
-                    int x, y;
-                    staminaBar->GetPos(x, y);
-                    y = y - 50 - screen->FontY();
-                    auto msg = zSTRING{ symbol1->single_intdata } + zSTRING{ "/" } + zSTRING{ symbol2->single_intdata * 10 };
-                    auto msglen = screen->FontSize(msg);
-                    x = 4096 - msglen / 2;
-                    // printing
-                    screen->Print(x, y, msg);
-                }
+                    newBar_ClearValue();
+                    {
+                        int xs, ys, xh, yh, xm, ym;
+                        int sx, sy, sx2, sy2;
+                        // Stamina
+                        {
+                            staminaBar->GetPos(xs, ys);
+                            ys = ys - 50 - screen->FontY();
+                            auto msgs = zSTRING {"Wytrzyma³oœæ: "} + zSTRING{atr_stamina->single_intdata} + zSTRING{"/"} + zSTRING{atr_stamina_max->single_intdata * 10};
+                            auto msglen = screen->FontSize(msgs);
+                            xs = 4096 - msglen / 2;
+                            // printing
+                            screen->Print(xs, ys, msgs);
+                        }
 
-                if (StaminaText == 1)
-                {
-                    int x, y;
-                    staminaBar->GetPos(x, y);
-                    y = y - 50 - screen->FontY();
-                    auto msg = zSTRING{ "Wytrzyma³oœæ: " } + zSTRING{ symbol1->single_intdata } + zSTRING{ "/" } + zSTRING{ symbol2->single_intdata * 10 };
-                    auto msglen = screen->FontSize(msg);
-                    x = 4096 - msglen / 2;
-                    // printing
-                    screen->Print(x, y, msg);
+                        // Hp
+                        {
+                            ogame->hpBar->GetPos(xh, yh);
+                            ogame->hpBar->GetSize(sx, sy);
+                            yh = yh - 50 - screen->FontY();
+                            auto msgh = zSTRING {"Zdrowie: "} + zSTRING{atr_hp} + zSTRING{"/"} + zSTRING{atr_hp_max};
+                            auto msglen = screen->FontSize(msgh);
+                            xh = (xh + sx / 2) - msglen / 2;
+                            // printing
+                            screen->Print(xh, yh, msgh);
+                        }
+
+                        // Mana
+                        {
+                            ogame->manaBar->GetPos(xm, ym);
+                            ogame->manaBar->GetSize(sx2, sy2);
+                            ym = ym - 50 - screen->FontY();
+                            auto msgm = zSTRING {"Mana: "} + zSTRING{atr_mana} + zSTRING{"/"} + zSTRING{atr_mana_max};
+                            auto msglen = screen->FontSize(msgm);
+                            xm = (xm + sx2 / 2) - msglen / 2;
+                            // printing
+                            screen->Print(xm, ym, msgm);
+                        }
+
+                        // Focus
+                        {
+                            if (player->GetFocusNpc() != 0)
+                            {
+                                int xf, yf, sx3, sy3;
+                                oCViewStatusBar* focusbar = ogame->focusBar;
+                                focusbar->GetPos(xf, yf);
+                                focusbar->GetSize(sx3, sy3);
+
+                                int focushp = focusbar->currentValue;
+                                int focusmaxhp = focusbar->maxHigh;
+
+                                yf = yf + 50 + screen->FontY();
+                                auto msgf = zSTRING{ focushp } + zSTRING{ "/" } + zSTRING{ focusmaxhp };
+                                auto msglen = screen->FontSize(msgf);
+                                xf = (xf + sx3 / 2) - msglen / 2;
+
+                                valueViewFocus = new zCView(0, 0, 8192, 8192);
+                                screen->InsertItem(valueViewFocus);
+                                valueViewFocus->Print(xf, yf, msgf);
+                                //screen->Print(xf, yf, msgf);
+                            }
+                        }
+                    }
                 }
             }
 
+            if (BarValues == 3)
+            {
+                auto stamina = parser->GetSymbol("ATR_STAMINA");
+                auto stamina_max = parser->GetSymbol("ATR_STAMINA_MAX");
+                oCViewStatusBar* focusbar = ogame->focusBar;
+                int focushp = focusbar->currentValue;
+                int focusmaxhp = focusbar->maxHigh;
+
+                newBar_ClearValue();
+
+                auto strS = zSTRING{ stamina->single_intdata } + zSTRING{ "/" } + zSTRING{ stamina_max->single_intdata * 10 };
+                auto strH = zSTRING{ atr_hp } + zSTRING{ "/" } + zSTRING{ atr_hp_max };
+                auto strM = zSTRING{ atr_mana } + zSTRING{ "/" } + zSTRING{ atr_mana_max };
+                auto strF = zSTRING{ focushp } + zSTRING{ "/" } + zSTRING{ focusmaxhp };
+
+                valueViewStamina = new zCView(0, 0, 8192, 8192);
+                valueViewHp = new zCView(0, 0, 8192, 8192);
+                valueViewMana = new zCView(0, 0, 8192, 8192);
+                valueViewFocus = new zCView(0, 0, 8192, 8192);
+
+                zCView* ownerviewS = staminaBar->range_bar;
+                zCView* ownerviewH = ogame->hpBar->range_bar;
+                zCView* ownerviewM = ogame->manaBar->range_bar;
+                zCView* ownerviewF = ogame->focusBar->range_bar;
+
+
+                ownerviewS->InsertItem(valueViewStamina);
+                ownerviewH->InsertItem(valueViewHp);
+                ownerviewM->InsertItem(valueViewMana);
+                ownerviewF->InsertItem(valueViewFocus);
+
+                valueViewStamina->PrintCXY(strS);
+                valueViewHp->PrintCXY(strH);
+                valueViewMana->PrintCXY(strM);
+                valueViewFocus->PrintCXY(strF);
+            };
         }
 
 
@@ -212,11 +344,14 @@ namespace GOTHIC_NAMESPACE
         }
     }
 
+
     // Hooking the function of updating bar values
     auto Hook_oCGame_UpdatePlayerStatus_Union = ::Union::CreateHook(reinterpret_cast<void*>(0x006C3140), &oCGame::UpdatePlayerStatus_Union);
     void oCGame::UpdatePlayerStatus_Union()
     {
         (this->*Hook_oCGame_UpdatePlayerStatus_Union)();
+
+        auto valueView = new zCView(0, 0, 8192, 8192);
 
         // if no bar
         if (!staminaBar)
@@ -263,7 +398,6 @@ namespace GOTHIC_NAMESPACE
             screen->RemoveItem(staminaBar);
         }
     }
-
 
 
 }
