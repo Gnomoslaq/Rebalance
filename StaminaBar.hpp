@@ -3,6 +3,7 @@ namespace GOTHIC_NAMESPACE
     bool ShowPray;
     int BarValues;
     bool zUtilitesEnemyBarAbove;
+    int crimeuserposx, crimeuserposy;
 
     // pointer to bar 
     oCViewStatusBar* staminaBar = NULL;
@@ -327,8 +328,20 @@ namespace GOTHIC_NAMESPACE
 
                     auto GetDay = ogame->wldTimer->GetDay();
 
-                    int posx, posy;
-                    ogame->manaBar->GetPos(posx, posy);
+                    int posx, posy1, posy2;
+                    if (crimeuserposx == 0 && crimeuserposy == 0)
+                    {
+                        ogame->manaBar->GetPos(posx, posy1);
+                        posy1 = 7200;
+                        posy2 = 7400;
+                    }
+                    if (crimeuserposx != 0 || crimeuserposy != 0)
+                    {
+                        posx = crimeuserposx;
+                        posy1 = crimeuserposy;
+                        posy2 = posy1 + 200;
+                    }
+
 
                     auto originalcolor = screen->fontColor;
 
@@ -343,15 +356,15 @@ namespace GOTHIC_NAMESPACE
                         auto msgBeliarLen = screen->FontSize(msgBeliar);
 
                         //7584
-                        screen->Print(posx, 7200, msgInnos);
-                        screen->Print(posx, 7400, msgBeliar);
+                        screen->Print(posx, posy1, msgInnos);
+                        screen->Print(posx, posy2, msgBeliar);
 
                         if (player_guild != 1 && player_guild != 4)
                         {
                             if (PrayIdolDay->single_intdata == GetDay)
                             {
                                 screen->SetFontColor(originalcolor);
-                                screen->Print(posx + msgBeliarLen, 7400, Beliar->single_intdata);
+                                screen->Print(posx + msgBeliarLen, posy2, Beliar->single_intdata);
                             }
                             screen->SetFontColor(originalcolor);
 
@@ -359,7 +372,7 @@ namespace GOTHIC_NAMESPACE
                             if (PrayIdolDay->single_intdata != GetDay)
                             {
                                 screen->SetFontColor(zCOLOR(255, 0, 0));
-                                screen->Print(posx + msgBeliarLen, 7400, Beliar->single_intdata);
+                                screen->Print(posx + msgBeliarLen, posy2, Beliar->single_intdata);
                             }
                             screen->SetFontColor(originalcolor);
 
@@ -369,14 +382,14 @@ namespace GOTHIC_NAMESPACE
                         if (player_guild == 1 || player_guild == 4)
                         {
                             screen->SetFontColor(originalcolor);
-                            screen->Print(posx + msgBeliarLen, 7400, Beliar->single_intdata);
+                            screen->Print(posx + msgBeliarLen, posy2, Beliar->single_intdata);
                         }
 
                         // PrayDay == GetDay
                         if (PrayDay->single_intdata == GetDay)
                         {
                             screen->SetFontColor(originalcolor);
-                            screen->Print(posx + msgBeliarLen, 7200, Innos);
+                            screen->Print(posx + msgBeliarLen, posy1, Innos);
                         }
                         screen->SetFontColor(originalcolor);
 
@@ -384,7 +397,7 @@ namespace GOTHIC_NAMESPACE
                         if (PrayDay->single_intdata != GetDay)
                         {
                             screen->SetFontColor(zCOLOR(255, 0, 0));
-                            screen->Print(posx + msgBeliarLen, 7200, Innos);
+                            screen->Print(posx + msgBeliarLen, posy1, Innos);
                         }
                         screen->SetFontColor(originalcolor);
                     }
