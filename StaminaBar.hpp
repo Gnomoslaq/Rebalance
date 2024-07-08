@@ -284,8 +284,8 @@ namespace GOTHIC_NAMESPACE
                     if (crimeuserposx == 0 && crimeuserposy == 0)
                     {
                         ogame->manaBar->GetPos(posx, posy1);
-                        posy1 -= 400;
-                        posy2 = posy1 + 200;
+                        posy1 = 7200;
+                        posy2 = 7400;
                     }
                     if (crimeuserposx != 0 || crimeuserposy != 0)
                     {
@@ -308,7 +308,6 @@ namespace GOTHIC_NAMESPACE
                         auto msgBeliarLen = screen->FontSize(msgBeliar);
 
                         //7584
-                        if (crimeuserposx)
                         screen->Print(posx, posy1, msgInnos);
                         screen->Print(posx, posy2, msgBeliar);
 
