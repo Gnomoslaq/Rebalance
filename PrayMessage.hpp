@@ -20,33 +20,29 @@ namespace GOTHIC_NAMESPACE
 			if (oldInnos->single_intdata > InnosA)
 			{
 				auto msg = zSTRING{ "Karma Innosa -" } + zSTRING{ oldInnos->single_intdata - InnosA };
-				ogame->GetTextView()->ClrPrintwin();
-				ogame->GetTextView()->PrintTimedCX(200, msg, 5000.0f, &printcolorred);
+				ogame->GetTextView()->Printwin(msg);
 				oldInnos->single_intdata = InnosA;
 				return;
 			}
 			if (oldInnos->single_intdata < InnosA)
 			{
 				auto msg = zSTRING{ "Karma Innosa +" } + zSTRING{ InnosA - oldInnos->single_intdata };
-				ogame->GetTextView()->ClrPrintwin();
-				ogame->GetTextView()->PrintTimedCX(200, msg, 5000.0f, &printcolorgreen);
+				ogame->GetTextView()->Printwin(msg);
 				oldInnos->single_intdata = InnosA;
 				return;
 			}
-
+			
 			if (oldBeliar->single_intdata > BeliarP->single_intdata)
 			{
 				auto msg = zSTRING{ "Karma Beliara -" } + zSTRING{ oldBeliar->single_intdata - BeliarP->single_intdata };
-				ogame->GetTextView()->ClrPrintwin();
-				ogame->GetTextView()->PrintTimedCX(200, msg, 5000.0f, &printcolorred);
+				ogame->GetTextView()->Printwin(msg);
 				oldBeliar->single_intdata = BeliarP->single_intdata;
 				return;
 			}
 			if (oldBeliar->single_intdata < BeliarP->single_intdata)
 			{
 				auto msg = zSTRING{ "Karma Beliara +" } + zSTRING{ BeliarP->single_intdata - oldBeliar->single_intdata};
-				ogame->GetTextView()->ClrPrintwin();
-				ogame->GetTextView()->PrintTimedCX(200, msg, 5000.0f, &printcolorgreen);
+				ogame->GetTextView()->Printwin(msg);
 				oldBeliar->single_intdata = BeliarP->single_intdata;
 				return;
 			}
