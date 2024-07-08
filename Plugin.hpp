@@ -5,6 +5,7 @@
 
 	zSTRING SprintKey;
 	int zUtilitiesbars;
+	bool zUtilitesEnemyBarAbove;
 
 	void ReadSprintBinds()
 	{
@@ -32,6 +33,7 @@
 		zUtilitiesbars = zoptions->ReadInt(zUtilities.data(), "StatusBarValueMode", 0);
 		crimeuserposx = zoptions->ReadInt(PluginName.data(), "CrimePosX", 0);
 		crimeuserposy = zoptions->ReadInt(PluginName.data(), "CrimePosY", 0);
+		zUtilitesEnemyBarAbove = zoptions->ReadBool(zUtilities.data(), "ShowEnemyBarAboveHim", 0);
 	}
 
 	void Game_Entry()
