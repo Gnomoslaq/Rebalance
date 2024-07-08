@@ -30,6 +30,8 @@
 		BarValues = zoptions->ReadInt(PluginName.data(), "BarValues", 0);
 		ShowPrayMessage = zoptions->ReadBool(PluginName.data(), "ShowPrayMessage", 1);
 		zUtilitiesbars = zoptions->ReadInt(zUtilities.data(), "StatusBarValueMode", 0);
+		crimeuserposx = zoptions->ReadInt(PluginName.data(), "CrimePosX", 0);
+		crimeuserposy = zoptions->ReadInt(PluginName.data(), "CrimePosY", 0);
 	}
 
 	void Game_Entry()
