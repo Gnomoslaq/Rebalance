@@ -30,6 +30,7 @@
 		BarValues = zoptions->ReadInt(PluginName.data(), "BarValues", 0);
 		ShowPrayMessage = zoptions->ReadBool(PluginName.data(), "ShowPrayMessage", 1);
 		zUtilitiesbars = zoptions->ReadInt(zUtilities.data(), "StatusBarValueMode", 0);
+		zUtilitesEnemyBarAbove = zoptions->ReadBool(zUtilities.data(), "ShowEnemyBarAboveHim", 0);
 	}
 
 	void Game_Entry()

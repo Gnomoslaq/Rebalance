@@ -2,6 +2,7 @@ namespace GOTHIC_NAMESPACE
 {
     bool ShowPray;
     int BarValues;
+    bool zUtilitesEnemyBarAbove;
 
     // pointer to bar 
     oCViewStatusBar* staminaBar = NULL;
@@ -120,24 +121,49 @@ namespace GOTHIC_NAMESPACE
 
                         // Focus
                         {
-                            if (player->GetFocusNpc() != 0)
+                            if (zUtilitesEnemyBarAbove == 0)
                             {
-                                oCViewStatusBar* focusbar = ogame->focusBar;
-                                focusbar->GetPos(xf, yf);
-                                focusbar->GetSize(sx3, sy3);
+                                if (player->GetFocusNpc() != 0)
+                                {
+                                    oCViewStatusBar* focusbar = ogame->focusBar;
+                                    focusbar->GetPos(xf, yf);
+                                    focusbar->GetSize(sx3, sy3);
 
-                                int focushp = focusbar->currentValue;
-                                int focusmaxhp = focusbar->maxHigh;
+                                    int focushp = focusbar->currentValue;
+                                    int focusmaxhp = focusbar->maxHigh;
 
-                                yf = yf + 50 + screen->FontY();
-                                auto msgf = zSTRING{ focushp } + zSTRING{ "/" } + zSTRING{ focusmaxhp };
-                                auto msglen = screen->FontSize(msgf);
-                                xf = (xf + sx3 / 2) - msglen / 2;
+                                    yf = yf + 50 + screen->FontY();
+                                    auto msgf = zSTRING{ focushp } + zSTRING{ "/" } + zSTRING{ focusmaxhp };
+                                    auto msglen = screen->FontSize(msgf);
+                                    xf = (xf + sx3 / 2) - msglen / 2;
 
-                                valueViewFocus = new zCView(0, 0, 8192, 8192);
-                                screen->InsertItem(valueViewFocus);
-                                valueViewFocus->Print(xf, yf, msgf);
-                                //screen->Print(xf, yf, msgf);
+                                    valueViewFocus = new zCView(0, 0, 8192, 8192);
+                                    screen->InsertItem(valueViewFocus);
+                                    valueViewFocus->Print(xf, yf, msgf);
+                                    //screen->Print(xf, yf, msgf);
+                                }
+                            }
+                            if (zUtilitesEnemyBarAbove == 1)
+                            {
+                                if (player->GetFocusNpc() != 0)
+                                {
+                                    oCViewStatusBar* focusbar = ogame->focusBar;
+                                    focusbar->GetPos(xf, yf);
+                                    focusbar->GetSize(sx3, sy3);
+
+                                    int focushp = focusbar->currentValue;
+                                    int focusmaxhp = focusbar->maxHigh;
+
+                                    yf = yf - 50 - screen->FontY();
+                                    auto msgf = zSTRING{ focushp } + zSTRING{ "/" } + zSTRING{ focusmaxhp };
+                                    auto msglen = screen->FontSize(msgf);
+                                    xf = (xf + sx3 / 2) - msglen / 2;
+
+                                    valueViewFocus = new zCView(0, 0, 8192, 8192);
+                                    screen->InsertItem(valueViewFocus);
+                                    valueViewFocus->Print(xf, yf, msgf);
+                                    //screen->Print(xf, yf, msgf);
+                                }
                             }
                         }
                     }
@@ -150,8 +176,8 @@ namespace GOTHIC_NAMESPACE
                 {
                     newBar_ClearValue();
                     {
-                        int xs, ys, xh, yh, xm, ym;
-                        int sx, sy, sx2, sy2;
+                        int xs, ys, xh, yh, xm, ym, xf, yf;
+                        int sx, sy, sx2, sy2, sx3, sy3;
                         // Stamina
                         {
                             staminaBar->GetPos(xs, ys);
@@ -189,25 +215,49 @@ namespace GOTHIC_NAMESPACE
 
                         // Focus
                         {
-                            if (player->GetFocusNpc() != 0)
+                            if (zUtilitesEnemyBarAbove == 0)
                             {
-                                int xf, yf, sx3, sy3;
-                                oCViewStatusBar* focusbar = ogame->focusBar;
-                                focusbar->GetPos(xf, yf);
-                                focusbar->GetSize(sx3, sy3);
+                                if (player->GetFocusNpc() != 0)
+                                {
+                                    oCViewStatusBar* focusbar = ogame->focusBar;
+                                    focusbar->GetPos(xf, yf);
+                                    focusbar->GetSize(sx3, sy3);
 
-                                int focushp = focusbar->currentValue;
-                                int focusmaxhp = focusbar->maxHigh;
+                                    int focushp = focusbar->currentValue;
+                                    int focusmaxhp = focusbar->maxHigh;
 
-                                yf = yf + 50 + screen->FontY();
-                                auto msgf = zSTRING{ focushp } + zSTRING{ "/" } + zSTRING{ focusmaxhp };
-                                auto msglen = screen->FontSize(msgf);
-                                xf = (xf + sx3 / 2) - msglen / 2;
+                                    yf = yf + 50 + screen->FontY();
+                                    auto msgf = zSTRING{ focushp } + zSTRING{ "/" } + zSTRING{ focusmaxhp };
+                                    auto msglen = screen->FontSize(msgf);
+                                    xf = (xf + sx3 / 2) - msglen / 2;
 
-                                valueViewFocus = new zCView(0, 0, 8192, 8192);
-                                screen->InsertItem(valueViewFocus);
-                                valueViewFocus->Print(xf, yf, msgf);
-                                //screen->Print(xf, yf, msgf);
+                                    valueViewFocus = new zCView(0, 0, 8192, 8192);
+                                    screen->InsertItem(valueViewFocus);
+                                    valueViewFocus->Print(xf, yf, msgf);
+                                    //screen->Print(xf, yf, msgf);
+                                }
+                            }
+                            if (zUtilitesEnemyBarAbove == 1)
+                            {
+                                if (player->GetFocusNpc() != 0)
+                                {
+                                    oCViewStatusBar* focusbar = ogame->focusBar;
+                                    focusbar->GetPos(xf, yf);
+                                    focusbar->GetSize(sx3, sy3);
+
+                                    int focushp = focusbar->currentValue;
+                                    int focusmaxhp = focusbar->maxHigh;
+
+                                    yf = yf - 50 - screen->FontY();
+                                    auto msgf = zSTRING{ focushp } + zSTRING{ "/" } + zSTRING{ focusmaxhp };
+                                    auto msglen = screen->FontSize(msgf);
+                                    xf = (xf + sx3 / 2) - msglen / 2;
+
+                                    valueViewFocus = new zCView(0, 0, 8192, 8192);
+                                    screen->InsertItem(valueViewFocus);
+                                    valueViewFocus->Print(xf, yf, msgf);
+                                    //screen->Print(xf, yf, msgf);
+                                }
                             }
                         }
                     }
