@@ -442,19 +442,19 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ExternalFunctions.hpp" />
+    <ClInclude Include="externalFunctions.hpp" />
     <ClInclude Include="Headers.h" />
     <ClInclude Include="KeyCodes.hpp" />
     <ClInclude Include="GameEvents.hpp" />
-    <ClInclude Include="NewMenu.hpp" />
-    <ClInclude Include="NewSprint.hpp" />
+    <ClInclude Include="newMenu.hpp" />
+    <ClInclude Include="newSprint.hpp" />
     <ClInclude Include="playerHelper.hpp" />
     <ClInclude Include="Plugin.hpp" />
-    <ClInclude Include="PointDamageFix.hpp" />
-    <ClInclude Include="PrayMessage.hpp" />
-    <ClInclude Include="StaminaBar.hpp" />
-    <ClInclude Include="StatusBars.h" />
-    <ClInclude Include="Utils.hpp" />
+    <ClInclude Include="pointDamageFix.hpp" />
+    <ClInclude Include="prayMessage.hpp" />
+    <ClInclude Include="staminaBar.hpp" />
+    <ClInclude Include="statusBar.hpp" />
+    <ClInclude Include="utils.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Gothic_UserAPI\CGameManager.inl" />

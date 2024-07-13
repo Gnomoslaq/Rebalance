@@ -33,31 +33,31 @@
     <ClInclude Include="Plugin.hpp">
       <Filter>Plugin</Filter>
     </ClInclude>
-    <ClInclude Include="StaminaBar.hpp">
+    <ClInclude Include="staminaBar.hpp">
       <Filter>Plugin</Filter>
     </ClInclude>
     <ClInclude Include="playerHelper.hpp">
       <Filter>Plugin</Filter>
     </ClInclude>
-    <ClInclude Include="NewMenu.hpp">
+    <ClInclude Include="newMenu.hpp">
       <Filter>Plugin</Filter>
     </ClInclude>
-    <ClInclude Include="PrayMessage.hpp">
+    <ClInclude Include="prayMessage.hpp">
       <Filter>Plugin</Filter>
     </ClInclude>
-    <ClInclude Include="NewSprint.hpp">
+    <ClInclude Include="newSprint.hpp">
       <Filter>Plugin</Filter>
     </ClInclude>
-    <ClInclude Include="PointDamageFix.hpp">
+    <ClInclude Include="pointDamageFix.hpp">
       <Filter>Plugin</Filter>
     </ClInclude>
-    <ClInclude Include="ExternalFunctions.hpp">
+    <ClInclude Include="externalFunctions.hpp">
       <Filter>Plugin</Filter>
     </ClInclude>
-    <ClInclude Include="Utils.hpp">
+    <ClInclude Include="utils.hpp">
       <Filter>Plugin</Filter>
     </ClInclude>
-    <ClInclude Include="StatusBars.h">
+    <ClInclude Include="statusBar.hpp">
       <Filter>Plugin</Filter>
     </ClInclude>
   </ItemGroup>

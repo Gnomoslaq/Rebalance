@@ -1,5 +1,7 @@
 ﻿namespace GOTHIC_NAMESPACE
 {
+	float timer;
+
 	void Game_Entry()
 	{
 		//GAME ENTRY
@@ -14,22 +16,17 @@
 		}
 		*/
 		
-
+		statusBar = std::make_unique<StatusBar>();
 		newStatusMenu = std::make_unique<NewStatusMenu>();
-
-
-		newStatusMenu->UpdateStatusMenu();
-
-
-
+		prayMessage = std::make_unique<PrayMessage>();
 		newSprint = std::make_unique<NewSprint>();
 
+		newStatusMenu->UpdateStatusMenu();
 		UpdatePluginSettings();
 	}
 	
 	void Game_ApplyOptions()
 	{
-
 		UpdatePluginSettings();
 		newStatusMenu->UpdateStatusMenu();
 		newBar_UpdatePosAndSizes();
@@ -40,33 +37,19 @@
 		//GAME PRE LOOP
 	}
 
-	float timer;
+
 
 	void Game_Loop()
 	{
-		if (!ogame->GetShowPlayerStatus())
-		{
-			newBar_ClearValue();
-		}
-
-		if (!ogame->focusBar)
-		{
-			delete (valueViewFocus); valueViewFocus = 0;
-		}
-
-
-		if (zUtilitiesbars != 0 && BarValues != 0)
-		{
-			screen->PrintCXY("Zdublowane wyświetlanie wartości pasków, wyłącz jedne z nich!");
-		}
-
-		if (ShowPrayMessage)
-		{
-			PrayMessage();
-		}
-		
+		prayMessage->Loop();
 		newSprint->Loop();
 		newSprint->SprintTick();
+		statusBar->Loop();
+
+		if (!ogame->GetShowPlayerStatus())
+		{
+			statusBar->ClearValue();
+		}
 
 	}
 
@@ -84,11 +67,13 @@
 	{
 		newStatusMenu.release();
 		newSprint.release();
+		statusBar.release();
+		prayMessage.release();
 	}
 
 	void Game_Pause()
 	{
-		newBar_ClearValue();
+		statusBar->ClearValue();
 	}
 
 	void Game_Unpause()

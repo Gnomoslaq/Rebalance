@@ -4,7 +4,7 @@ namespace GOTHIC_NAMESPACE
 	static constexpr std::string_view zUtilities = "ZUTILITIES";
 
 	zSTRING SprintKey;
-	int zUtilitiesbars;
+	int BarValues;
 
 	void ReadSprintBinds()
 	{
@@ -29,8 +29,6 @@ namespace GOTHIC_NAMESPACE
 		ShowPray = zoptions->ReadBool(PluginName.data(), "ShowPray", true);
 		BarValues = zoptions->ReadInt(PluginName.data(), "BarValues", 0);
 		ShowPrayMessage = zoptions->ReadBool(PluginName.data(), "ShowPrayMessage", 1);
-		zUtilitiesbars = zoptions->ReadInt(zUtilities.data(), "StatusBarValueMode", 0);
-		zUtilitesEnemyBarAbove = zoptions->ReadBool(zUtilities.data(), "ShowEnemyBarAboveHim", 0);
 		crimeuserposx = zoptions->ReadInt(PluginName.data(), "CrimePosX", 0);
 		crimeuserposy = zoptions->ReadInt(PluginName.data(), "CrimePosY", 0);
 	}
