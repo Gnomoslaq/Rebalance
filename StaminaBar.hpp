@@ -79,7 +79,7 @@ namespace GOTHIC_NAMESPACE
 
             if (BarValues == 1)
             {
-                if (!playerHelper.IsBusy() && !playerHelper.OnPause() && player->GetBodyState() != BS_DIVE && staminaBar)
+                if (!playerHelper.IsBusy() && !playerHelper.OnPause())
                 {
                     newBar_ClearValue();
                     {

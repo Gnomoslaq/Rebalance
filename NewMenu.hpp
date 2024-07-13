@@ -343,11 +343,8 @@ namespace GOTHIC_NAMESPACE
 			if (pickpocketenum == 1)
 			{
 				pStatusTexture->Print(STAT_B_X2, STAT_TAL_Y + (STAT_DY * 7), MENU_ITEM_TALENT_YES);
-			}
-			if (pickpocketenum == 1)
-			{
+			}		
 				pStatusTexture->Print(STAT_B_X3, STAT_TAL_Y + (STAT_DY * 7), atr_pickpocket->single_intdata);
-			}
 
 			// Lockpicking
 			pStatusTexture->Print(STAT_B_X1, STAT_TAL_Y + (STAT_DY * 8), MENU_ITEM_TALENT_7p_TITLE);

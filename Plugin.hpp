@@ -1,40 +1,5 @@
 ﻿namespace GOTHIC_NAMESPACE
 {
-	static constexpr std::string_view PluginName = "Rebalance";
-	static constexpr std::string_view zUtilities = "ZUTILITIES";
-
-	zSTRING SprintKey;
-	int zUtilitiesbars;
-
-	void ReadSprintBinds()
-	{
-		newSprint->sprintkeys.DeleteList();
-		void* buffer = 0;
-		unsigned long bindSize = 0;
-		bindSize = zoptions->ReadRaw("KEYS", "keySprint", buffer, newSprint->sprintkeys.GetArray(), newSprint->sprintkeys.GetNumInList() << 1);
-		newSprint->sprintkeys.DeleteList();
-		for (int i = 0; i < bindSize >> 1; i++)
-		{
-			if (((unsigned short*)buffer)[i] != 0)
-			{
-				newSprint->sprintkeys.Insert(((unsigned short*)buffer)[i]);
-			}
-		}
-		delete[] buffer;
-	}
-
-	void UpdatePluginSettings()
-	{
-		ReadSprintBinds();
-		ShowPray = zoptions->ReadBool(PluginName.data(), "ShowPray", true);
-		BarValues = zoptions->ReadInt(PluginName.data(), "BarValues", 0);
-		ShowPrayMessage = zoptions->ReadBool(PluginName.data(), "ShowPrayMessage", 1);
-		zUtilitiesbars = zoptions->ReadInt(zUtilities.data(), "StatusBarValueMode", 0);
-		zUtilitesEnemyBarAbove = zoptions->ReadBool(zUtilities.data(), "ShowEnemyBarAboveHim", 0);
-		crimeuserposx = zoptions->ReadInt(PluginName.data(), "CrimePosX", 0);
-		crimeuserposy = zoptions->ReadInt(PluginName.data(), "CrimePosY", 0);
-	}
-
 	void Game_Entry()
 	{
 		//GAME ENTRY
@@ -48,6 +13,7 @@
 			gameMan->ExitGame();
 		}
 		*/
+		
 
 		newStatusMenu = std::make_unique<NewStatusMenu>();
 
@@ -66,6 +32,7 @@
 
 		UpdatePluginSettings();
 		newStatusMenu->UpdateStatusMenu();
+		newBar_UpdatePosAndSizes();
 	}
 
 	void Game_PreLoop()
@@ -77,15 +44,21 @@
 
 	void Game_Loop()
 	{
+		if (!ogame->GetShowPlayerStatus())
+		{
+			newBar_ClearValue();
+		}
+
+		if (!ogame->focusBar)
+		{
+			delete (valueViewFocus); valueViewFocus = 0;
+		}
+
+
 		if (zUtilitiesbars != 0 && BarValues != 0)
 		{
 			screen->PrintCXY("Zdublowane wyświetlanie wartości pasków, wyłącz jedne z nich!");
 		}
-
-
-
-		auto stamina = parser->GetSymbol("ATR_STAMINA");
-		auto stamina_max = parser->GetSymbol("ATR_STAMINA_MAX");
 
 		if (ShowPrayMessage)
 		{
@@ -95,32 +68,6 @@
 		newSprint->Loop();
 		newSprint->SprintTick();
 
-		/*
-		timer += ztimer->frameTimeFloat; // wersja zalezna od factormotion (szybciej spierdala na przyspieszeniu)
-		//timer += ztimer->frameTimeFloat / ztimer->factorMotion; // wersja zalezna od czasu rzeczywistego
-
-		if (timer < 1000.0f)
-		{
-			return;
-		}
-
-		timer -= 1000.0f;
-
-		if (newSprint->SprintActive && stamina->single_intdata > 0)
-		{
-			int StaminaTick = 5;
-
-			if (stamina->single_intdata >= StaminaTick)
-			{
-				stamina->single_intdata = stamina->single_intdata - StaminaTick;
-			}
-			if (stamina->single_intdata < StaminaTick)
-			{
-				stamina->single_intdata = 0;
-			}
-		}
-		*/
-		
 	}
 
 	void Game_PostLoop()
@@ -142,7 +89,6 @@
 	void Game_Pause()
 	{
 		newBar_ClearValue();
-
 	}
 
 	void Game_Unpause()
@@ -202,7 +148,7 @@
 
 	void Game_DefineExternals()
 	{
-		//GAME DEFINE EXTERNALS
+		//parser->DefineExternal("wld_gettimemin", wld_gettimemin, zPAR_TYPE_INT, zPAR_TYPE_VOID);
 	}
 
 	

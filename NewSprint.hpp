@@ -32,8 +32,6 @@ namespace GOTHIC_NAMESPACE
         float timer;
         void SprintTick()
         {
-
-
             auto stamina = parser->GetSymbol("ATR_STAMINA");
             auto stamina_max = parser->GetSymbol("ATR_STAMINA_MAX");
 

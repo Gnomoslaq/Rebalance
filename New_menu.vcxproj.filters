@@ -54,6 +54,12 @@
     <ClInclude Include="ExternalFunctions.hpp">
       <Filter>Plugin</Filter>
     </ClInclude>
+    <ClInclude Include="Utils.hpp">
+      <Filter>Plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="StatusBars.h">
+      <Filter>Plugin</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Gothic_UserAPI\CGameManager.inl">

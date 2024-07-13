@@ -6,3 +6,5 @@
 #include "PrayMessage.hpp"
 #include "PointDamageFix.hpp"
 #include "ExternalFunctions.hpp"
+#include "Utils.hpp"
+#include "StatusBars"

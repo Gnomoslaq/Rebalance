@@ -1,17 +1,17 @@
 namespace GOTHIC_NAMESPACE
 {
-	void wld_gettimehour()
+	int wld_gettimemin()
 	{
 		int day, hour, min;
+
 		ogame->GetTime(day, hour, min);
 
-		screen->PrintCXY(zSTRING{ day } + zSTRING{ hour } + zSTRING{ min });
-	}
+		if (min > 0)
+		{
+			parser->SetReturn(min);
+		}
 
-	void wld_gettimemin()
-	{
-		int day, hour, min;
-		ogame->GetTime(day, hour, min);
+		return FALSE;
 	}
 
 }

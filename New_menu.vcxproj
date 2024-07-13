@@ -453,6 +453,8 @@
     <ClInclude Include="PointDamageFix.hpp" />
     <ClInclude Include="PrayMessage.hpp" />
     <ClInclude Include="StaminaBar.hpp" />
+    <ClInclude Include="StatusBars.h" />
+    <ClInclude Include="Utils.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Gothic_UserAPI\CGameManager.inl" />
