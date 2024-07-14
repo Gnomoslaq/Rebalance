@@ -83,7 +83,7 @@ namespace GOTHIC_NAMESPACE
 
 		bool CanShowValues()
 		{
-			if (ogame->GetShowPlayerStatus() && staminaBar)
+			if (ogame->GetShowPlayerStatus() && staminaBar && !playerHelper.IsBusy())
 			{
 				return true;
 			}

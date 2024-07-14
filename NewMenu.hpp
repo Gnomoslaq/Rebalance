@@ -16,7 +16,6 @@ namespace GOTHIC_NAMESPACE
 
 		void UpdateStatusMenu()
 		{
-
 			// page 1
 			pStatusTexture->SetFont("FONT_OLD_10_WHITE.TGA");
 			pStatusTexture->SetFontColor(zCOLOR(255, 255, 255, 255));
@@ -722,10 +721,27 @@ namespace GOTHIC_NAMESPACE
 			auto MakeDefFire = parser->GetSymbol("MakeDefFire");
 			auto MakeDefFall = parser->GetSymbol("MakeDefFall");
 
+			auto UseCompote1 = parser->GetSymbol("UseCompote1");
+			auto UseCompote2 = parser->GetSymbol("UseCompote2");
+			auto UseEalbalzam = parser->GetSymbol("UseEalbalzam");
+			auto UseEalbalzamtwo = parser->GetSymbol("UseEalbalzamtwo");
 
-			auto msgTitle = zSTRING{ "U¿yte | Stworzone mikstury" };
-			auto msgTitleLen = pStatusTexture3->FontSize(msgTitle);
-			pStatusTexture3->Print(STAT_A_X1, STAT_PLYHEAD_Y, msgTitle);
+			auto MakeCompote1 = parser->GetSymbol("MakeCompote1");
+			auto MakeCompote2 = parser->GetSymbol("MakeCompote2");
+			auto MakeEalbalzam = parser->GetSymbol("MakeEalbalzam");
+			auto MakeEalbalzamtwo = parser->GetSymbol("MakeEalbalzamtwo");
+
+			auto UseTablethp = parser->GetSymbol("UseTablethp");
+			auto UseTabletstr = parser->GetSymbol("UseTabletstr");
+			auto UseTabletdex = parser->GetSymbol("UseTabletdex");
+			auto UseTabletmp = parser->GetSymbol("UseTabletmp");
+			auto UseTabletstm = parser->GetSymbol("UseTabletstm");
+			auto UseTablet1h = parser->GetSymbol("UseTablet1h");
+			auto UseTablet2h = parser->GetSymbol("UseTablet2h");
+			auto UseTabletbow = parser->GetSymbol("UseTabletbow");
+			auto UseTabletcrossbow = parser->GetSymbol("UseTabletcrossbow");
+
+
 			//pStatusTexture3->Print(854, STAT_PLYHEAD_Y, msgTitle);
 
 			pStatusTexture3->Print(STAT_A_X1, STAT_PLY_Y + (STAT_DY * 0), PermSTR);
@@ -780,6 +796,78 @@ namespace GOTHIC_NAMESPACE
 			auto msgPotionSkill = zSTRING{ UseMegaPotionSkill->single_intdata };
 			pStatusTexture3->Print(STAT_A_X3, STAT_PLY_Y + (STAT_DY * 12), UseMegaPotionSkill->single_intdata);
 
+
+
+			pStatusTexture3->Print(STAT_A_X4c, STAT_TAL_Y + (STAT_DY * 0), compote1);
+			auto msgCompote1 = zSTRING{ UseCompote1->single_intdata } + zSTRING{ "|" } + zSTRING{ MakeCompote1->single_intdata };
+			pStatusTexture3->Print(STAT_A_X4b, STAT_TAL_Y + (STAT_DY * 0), msgCompote1);
+
+			pStatusTexture3->Print(STAT_A_X4c, STAT_TAL_Y + (STAT_DY * 1), compote2);
+			auto msgCompote2 = zSTRING{ UseCompote2->single_intdata } + zSTRING{ "|" } + zSTRING{ MakeCompote2->single_intdata };
+			pStatusTexture3->Print(STAT_A_X4b, STAT_TAL_Y + (STAT_DY * 1), msgCompote2);
+
+			pStatusTexture3->Print(STAT_A_X4c, STAT_TAL_Y + (STAT_DY * 2), ealbalzam);
+			auto msgEalbalzam = zSTRING{ UseEalbalzam->single_intdata } + zSTRING{ "|" } + zSTRING{ MakeEalbalzam->single_intdata };
+			pStatusTexture3->Print(STAT_A_X4b, STAT_TAL_Y + (STAT_DY * 2), msgEalbalzam);
+
+			pStatusTexture3->Print(STAT_A_X4c, STAT_TAL_Y + (STAT_DY * 3), ealbalzamtwo);
+			auto msgEalbalzamtwo = zSTRING{ UseEalbalzamtwo->single_intdata } + zSTRING{ "|" } + zSTRING{ MakeEalbalzamtwo->single_intdata };
+			pStatusTexture3->Print(STAT_A_X4b, STAT_TAL_Y + (STAT_DY * 3), msgEalbalzamtwo);
+
+			pStatusTexture3->Print(STAT_A_X4c, STAT_TAL_Y + (STAT_DY * 5), tablethp);
+			auto msgtablethp = zSTRING{ UseTablethp->single_intdata };
+			pStatusTexture3->Print(STAT_A_X4b, STAT_TAL_Y + (STAT_DY * 5), UseTablethp->single_intdata);
+
+			pStatusTexture3->Print(STAT_A_X4c, STAT_TAL_Y + (STAT_DY * 6), tabletstr);
+			pStatusTexture3->Print(STAT_A_X4b, STAT_TAL_Y + (STAT_DY * 6), UseTabletstr->single_intdata);
+
+			pStatusTexture3->Print(STAT_A_X4c, STAT_TAL_Y + (STAT_DY * 7), tabletdex);
+			pStatusTexture3->Print(STAT_A_X4b, STAT_TAL_Y + (STAT_DY * 7), UseTabletdex->single_intdata);
+
+			pStatusTexture3->Print(STAT_A_X4c, STAT_TAL_Y + (STAT_DY * 8), tabletmp);
+			pStatusTexture3->Print(STAT_A_X4b, STAT_TAL_Y + (STAT_DY * 8), UseTabletmp->single_intdata);
+
+			pStatusTexture3->Print(STAT_A_X4c, STAT_TAL_Y + (STAT_DY * 9), tabletstm);
+			pStatusTexture3->Print(STAT_A_X4b, STAT_TAL_Y + (STAT_DY * 9), UseTabletstm->single_intdata);
+
+			pStatusTexture3->Print(STAT_A_X4c, STAT_TAL_Y + (STAT_DY * 10), tablet1h);
+			pStatusTexture3->Print(STAT_A_X4b, STAT_TAL_Y + (STAT_DY * 10), UseTablet1h->single_intdata);
+
+			pStatusTexture3->Print(STAT_A_X4c, STAT_TAL_Y + (STAT_DY * 11), tablet2h);
+			pStatusTexture3->Print(STAT_A_X4b, STAT_TAL_Y + (STAT_DY * 11), UseTablet2h->single_intdata);
+
+			pStatusTexture3->Print(STAT_A_X4c, STAT_TAL_Y + (STAT_DY * 12), tabletbow);
+			pStatusTexture3->Print(STAT_A_X4b, STAT_TAL_Y + (STAT_DY * 12), UseTabletbow->single_intdata);
+
+			pStatusTexture3->Print(STAT_A_X4c, STAT_TAL_Y + (STAT_DY * 13), tabletcrossbow);
+			pStatusTexture3->Print(STAT_A_X4b, STAT_TAL_Y + (STAT_DY * 13), UseTabletcrossbow->single_intdata);
+
+
+
+
+
+
+
+
+			auto msgTitle = zSTRING{ "- U¿yte | Stworzone mikstury -" };
+			auto msgTitleLen = pStatusTexture3->FontSize(msgTitle);
+			auto msgStrLen = pStatusTexture3->FontSize(msgStamina);
+			pStatusTexture3->Print(STAT_A_X1 + 151 + msgStrLen / 2, STAT_PLYHEAD_Y, msgTitle);
+
+
+			auto msgTitle2 = zSTRING{ "- U¿yte | Stworzone Kompoty/Wina" };
+			auto msgTitle3 = zSTRING{ "- U¿yte Staro¿ytne tabliczki -" };
+			auto msgTitle2Len = pStatusTexture3->FontSize(msgTitle2);
+			auto msgTitle3Len = pStatusTexture3->FontSize(msgTitle3);
+			auto msgCompote1Len = pStatusTexture3->FontSize(msgCompote1);
+			auto msgTablethplen = pStatusTexture3->FontSize(msgtablethp);
+			//pStatusTexture3->Print(STAT_A_X4c + 245 + msgCompote1Len / 2, STAT_PLYHEAD_Y, msgTitle2);
+			pStatusTexture3->Print(msgCompote1Len / 2 + STAT_A_X4c + ((STAT_A_X4b - STAT_A_X4c) - msgTitle2Len) / 2, STAT_PLYHEAD_Y, msgTitle2);
+			pStatusTexture3->Print(msgTablethplen / 2 + STAT_A_X4c + ((STAT_A_X4b - STAT_A_X4c) - msgTitle3Len) / 2, STAT_TAL_Y + (STAT_DY * 4), msgTitle3);
+			
+			
+			
+			
 			screen->PrintCX(7000, pagemsg);
 
 			//pStatusTexture3->Print(STAT_A_X1, STAT_PLY_Y - 1000, pagemsg);
@@ -816,8 +904,7 @@ namespace GOTHIC_NAMESPACE
 
 		int page = 1;
 
-		// Menu Items
-//		group 1 {
+		// Menu Items		
 zSTRING MENU_ITEM_STATUS_HEADING = "POSTAÆ";
 zSTRING MENU_ITEM_LEVEL_TITLE = "Poz.";
 zSTRING MENU_ITEM_TALENT_7_TITLE = "Magia";
@@ -870,9 +957,7 @@ zSTRING MENU_ITEM_TALENT_16_TITLE = "Wydobywanie z³ota";
 zSTRING MENU_ITEM_TALENT_17_TITLE = "Wydobywanie rudy";
 zSTRING MENU_ITEM_TALENT_18_TITLE = "Retoryka";
 zSTRING MENU_ITEM_TALENT_19_TITLE = "Ostrzenie";
-//		};
 		// Positions		
-//		group{ 
 		const int STAT_A_X1 = 500;
 		const int STAT_A_X2 = 2300;
 		const int STAT_A_X2b = 2600;
@@ -881,6 +966,7 @@ zSTRING MENU_ITEM_TALENT_19_TITLE = "Ostrzenie";
 		const int STAT_A_X4 = 3400;
 		const int STAT_A_X4a = 5500;
 		const int STAT_A_X4b = 7600;
+		const int STAT_A_X4c = 4000;
 		const int STAT_B_X1 = 3800;
 		const int STAT_B_X2 = 6000;
 		const int STAT_B_X3 = 7200;
@@ -894,9 +980,7 @@ zSTRING MENU_ITEM_TALENT_19_TITLE = "Ostrzenie";
 		const int STAT_TALHEAD_Y = 1000;
 		const int STAT_TAL_Y = 1450;
 		const int STAT_DY = 300; 
-//};
 		// Monsters
-//		group{ 
 			zSTRING speciesKilled = "";
 			zSTRING speciesKilled1 = "Chrz¹szczy:";
 			zSTRING speciesKilled2 = "Owiec:";
@@ -905,7 +989,7 @@ zSTRING MENU_ITEM_TALENT_19_TITLE = "Ostrzenie";
 			zSTRING speciesKilled5 = "Szkieletów-goblinów:";
 			zSTRING speciesKilled6 = "Przyzwanych szkieletów-goblinów:";
 			zSTRING speciesKilled7 = "Œcierwojadów:";
-			zSTRING speciesKilled8 = "Preriowych œcierwojadów:";
+			zSTRING speciesKilled8 = "Preriowych œcierw.:";
 			zSTRING speciesKilled9 = "Polnych bestii:";
 			zSTRING speciesKilled10 = "Krwiopijców:";
 			zSTRING speciesKilled11 = "Jaszczurów:";
@@ -923,7 +1007,7 @@ zSTRING MENU_ITEM_TALENT_19_TITLE = "Ostrzenie";
 			zSTRING speciesKilled23 = "Zêbaczy:";
 			zSTRING speciesKilled24 = "Smoczych zêbaczy:";
 			zSTRING speciesKilled25 = "Cieniostworów:";
-			zSTRING speciesKilled26 = "Szkieletów-cieniostworów:";
+			zSTRING speciesKilled26 = "Szkieletów-cieniost.:";
 			zSTRING speciesKilled27 = "Harpii:";
 			zSTRING speciesKilled28 = "Kamiennych golemów:";
 			zSTRING speciesKilled29 = "Ognistych golemów:";
@@ -962,7 +1046,7 @@ zSTRING MENU_ITEM_TALENT_19_TITLE = "Ostrzenie";
 			zSTRING speciesKilled62 = "Przyzwanych zombie:";
 			zSTRING speciesKilled63 = "Dzików:";
 			zSTRING speciesKilled64 = "Bagiennych trutni:";
-			zSTRING speciesKilled65 = "Leœnych goblinów:";
+			zSTRING speciesKilled65 = "Goblinów szamanów:";
 			zSTRING speciesKilled66 = "Pum:";
 			zSTRING speciesKilled67 = "Bagiennych trutni:";
 			zSTRING speciesKilled70 = "Lucian:";
@@ -978,10 +1062,7 @@ zSTRING MENU_ITEM_TALENT_19_TITLE = "Ostrzenie";
 			zSTRING speciesKilled81 = "Dusz:";
 			zSTRING speciesKilled82 = "Panów cienia:";
 			zSTRING speciesKilled83 = "¯ó³wi morskich:"; 
-//};
 		// Potions
-//		group{ 
-
 				zSTRING PermSTR = "Eliksir si³y";
 				zSTRING PermDEX = "Eliksir zrêcznoœci";
 				zSTRING PermMana = "Eliksir ducha";
@@ -996,7 +1077,23 @@ zSTRING MENU_ITEM_TALENT_19_TITLE = "Ostrzenie";
 				zSTRING PermMegaDrink = "Embarla Firgasto";
 				zSTRING PermMegaPotionSkill = "Eliksir potêgi";
 
-			
+		// Kompoty
+				zSTRING compote1 = "Kompot z leœnych jagód";
+				zSTRING compote2 = "Kompot z polnych jagód";
+				zSTRING ealbalzam = "Balsam Opatrznoœci";
+				zSTRING ealbalzamtwo = "Wino Zapomnienia";
+				
+		// Tabliczki
+				zSTRING tablethp = "Tablica zdrowia";
+				zSTRING tabletstr = "Tablica si³y";
+				zSTRING tabletdex = "Tablica zrêcznoœci";
+				zSTRING tabletmp = "Tablica magii";
+				zSTRING tabletstm = "Tablica wytrzyma³oœci";
+
+				zSTRING tablet1h = "Tablica walki br. jednorêczn¹";
+				zSTRING tablet2h = "Tablica walki br. dwurêczn¹";
+				zSTRING tabletbow = "Tablica walki ³ukiem";
+				zSTRING tabletcrossbow = "Tablica walki kusz¹";
 
 
 		zCView* pStatusTexture = new zCView(0, 0, SCREEN_MAX, SCREEN_MAX);
