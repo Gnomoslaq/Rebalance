@@ -227,7 +227,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='G2A|Win32'">
     <IncludePath>$(ProgramData)\UnionAPI\union-api;$(ProgramData)\UnionAPI\gothic-api;$(ProjectDir)Gothic_UserAPI;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProgramData)\UnionAPI\union-api;$(ProgramData)\UnionAPI\gothic-api;$(LibraryPath)</LibraryPath>
-    <OutDir>D:\SteamLibrary\steamapps\common\Gothic II Rebalance\system\Autorun</OutDir>
+    <OutDir>D:\SteamLibrary\steamapps\common\Gothic II\system\Autorun</OutDir>
     <TargetName>rebalance</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='G2|Win32'">
@@ -447,6 +447,7 @@
     <ClInclude Include="KeyCodes.hpp" />
     <ClInclude Include="GameEvents.hpp" />
     <ClInclude Include="newMenu.hpp" />
+    <ClInclude Include="newPickPocket.hpp" />
     <ClInclude Include="newSprint.hpp" />
     <ClInclude Include="playerHelper.hpp" />
     <ClInclude Include="Plugin.hpp" />
@@ -1081,6 +1082,9 @@
     <None Include="Gothic_UserAPI\zVEC2.inl" />
     <None Include="Gothic_UserAPI\zVEC3.inl" />
     <None Include="Gothic_UserAPI\zVEC4.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="staryhook.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

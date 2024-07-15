@@ -20,6 +20,7 @@
 		newStatusMenu = std::make_unique<NewStatusMenu>();
 		prayMessage = std::make_unique<PrayMessage>();
 		newSprint = std::make_unique<NewSprint>();
+		newPickPocket = std::make_unique<NewPickPocket>();
 
 		newStatusMenu->UpdateStatusMenu();
 		UpdatePluginSettings();
@@ -37,14 +38,13 @@
 		//GAME PRE LOOP
 	}
 
-
-
 	void Game_Loop()
 	{
 		prayMessage->Loop();
 		newSprint->Loop();
 		newSprint->SprintTick();
 		statusBar->Loop();
+		PickPocketLoop();
 
 		if (!ogame->GetShowPlayerStatus())
 		{
@@ -81,54 +81,61 @@
 
 	}
 
+	void LoadBegin() {
+	}
+
+	void LoadEnd() {
+		GetPickPocket();
+	}
+
 	void Game_SaveBegin()
 	{
-		//GAME SAVE BEGIN
+
 	}
 
 	void Game_SaveEnd()
 	{
-		//GAME SAVE END
+
 	}
 
 	void Game_LoadBegin_NewGame()
 	{
-		//GAME LOAD BEGIN NEW GAME
+		LoadBegin();
 	}
 
 	void Game_LoadEnd_NewGame()
 	{
-		//GAME LOAD END NEW GAME
+		LoadEnd();
 	}
 
 	void Game_LoadBegin_SaveGame()
 	{
-		//GAME LOAD BEGIN SAVE GAME
+		LoadBegin();
 	}
 
 	void Game_LoadEnd_SaveGame()
 	{
-
+		LoadEnd();
 	}
 
 	void Game_LoadBegin_ChangeLevel()
 	{
-		//GAME LOAD BEGIN CHANGE LEVEL
+		LoadBegin();
 	}
 
 	void Game_LoadEnd_ChangeLevel()
 	{
-		//GAME LOAD END CHANGE LEVEL
+		LoadEnd();
 	}
 
 	void Game_LoadBegin_Trigger()
 	{
-		//GAME LOAD BEGIN TRIGGER
+
 	}
 
 	void Game_LoadEnd_Trigger()
 	{
-		//GAME LOAD END TRIGGER
+
 	}
 
 	void Game_DefineExternals()

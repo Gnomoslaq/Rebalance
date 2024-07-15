@@ -5,6 +5,8 @@ namespace GOTHIC_NAMESPACE
 
 	zSTRING SprintKey;
 	int BarValues;
+	bool showPickPocket;
+
 
 	void ReadSprintBinds()
 	{
@@ -31,5 +33,10 @@ namespace GOTHIC_NAMESPACE
 		ShowPrayMessage = zoptions->ReadBool(PluginName.data(), "ShowPrayMessage", 1);
 		crimeuserposx = zoptions->ReadInt(PluginName.data(), "CrimePosX", 0);
 		crimeuserposy = zoptions->ReadInt(PluginName.data(), "CrimePosY", 0);
+		showPickPocket = zoptions->ReadBool(PluginName.data(), "ShowPickPocket", false);
+		ImmersiveMode = zoptions->ReadBool("ezPickPocket", "ImmersiveMode", false);
+		PickPocketAmbientNPCs = zoptions->ReadBool("ezPickPocket", "PickPocketAmbientNPCs", false);
+		GiveAmbientXP = zoptions->ReadBool("ezPickPocket", "GiveAmbientXP", false);
+		ShowPickPocketSign = zoptions->ReadBool("ezPickPocket", "ShowPickPocketSign", true);
 	}
 }
