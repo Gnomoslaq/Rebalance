@@ -449,6 +449,7 @@
     <ClInclude Include="newMenu.hpp" />
     <ClInclude Include="newPickPocket.hpp" />
     <ClInclude Include="newSprint.hpp" />
+    <ClInclude Include="options.hpp" />
     <ClInclude Include="playerHelper.hpp" />
     <ClInclude Include="Plugin.hpp" />
     <ClInclude Include="pointDamageFix.hpp" />

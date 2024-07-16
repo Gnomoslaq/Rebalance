@@ -26,12 +26,12 @@ namespace GOTHIC_NAMESPACE
 					return;
 				}
 
-				if (BarValues == 0)
+				if (bStaminaValues == 0)
 				{
 					ClearValue();
 				}
 
-				if (BarValues == 1)
+				if (bStaminaValues == 1)
 				{
 					ClearValue();
 
@@ -44,7 +44,7 @@ namespace GOTHIC_NAMESPACE
 					screen->Print(xs, ys, msgs);
 				}
 
-				if (BarValues == 2)
+				if (bStaminaValues == 2)
 				{
 					ClearValue();
 					
@@ -57,7 +57,7 @@ namespace GOTHIC_NAMESPACE
 					screen->Print(xs, ys, msgs);		
 				}
 
-				if (BarValues == 3)
+				if (bStaminaValues == 3)
 				{
 					ClearValue();
 
