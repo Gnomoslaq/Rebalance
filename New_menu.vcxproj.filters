@@ -63,6 +63,9 @@
     <ClInclude Include="newPickPocket.hpp">
       <Filter>Plugin</Filter>
     </ClInclude>
+    <ClInclude Include="options.hpp">
+      <Filter>Plugin</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Gothic_UserAPI\CGameManager.inl">

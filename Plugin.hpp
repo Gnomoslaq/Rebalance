@@ -24,11 +24,13 @@
 
 		newStatusMenu->UpdateStatusMenu();
 		UpdatePluginSettings();
+		ReadSprintBinds();
 	}
 	
 	void Game_ApplyOptions()
 	{
 		UpdatePluginSettings();
+		ReadSprintBinds();
 		newStatusMenu->UpdateStatusMenu();
 		newBar_UpdatePosAndSizes();
 	}
@@ -44,7 +46,7 @@
 		newSprint->Loop();
 		newSprint->SprintTick();
 		statusBar->Loop();
-		PickPocketLoop();
+		newPickPocket->Loop();
 
 		if (!ogame->GetShowPlayerStatus())
 		{
@@ -85,7 +87,7 @@
 	}
 
 	void LoadEnd() {
-		GetPickPocket();
+		newPickPocket->GetPickPocket();
 	}
 
 	void Game_SaveBegin()

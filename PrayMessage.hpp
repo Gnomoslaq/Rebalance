@@ -1,9 +1,5 @@
 namespace GOTHIC_NAMESPACE
 {
-	bool ShowPrayMessage;
-	bool ShowPray;
-    int crimeuserposx, crimeuserposy;
-
 	class PrayMessage
 	{
 	public:
@@ -15,7 +11,7 @@ namespace GOTHIC_NAMESPACE
 
 		void LoopMessage()
 		{
-			if (!ShowPrayMessage)
+			if (!bShowPrayMessage)
 			{
 				return;
 			}
@@ -67,7 +63,7 @@ namespace GOTHIC_NAMESPACE
 
         void LoopCount()
         {
-            if (!ShowPray)
+            if (!bShowPray)
             {
                 return;
             }
@@ -89,16 +85,16 @@ namespace GOTHIC_NAMESPACE
                         auto GetDay = ogame->wldTimer->GetDay();
 
                         int posx, posy1, posy2;
-                        if (crimeuserposx == 0 && crimeuserposy == 0)
+                        if (bCrimeUserPosX == 0 && bCrimeUserPosY == 0)
                         {
                             ogame->manaBar->GetPos(posx, posy1);
                             posy1 = 7200;
                             posy2 = 7400;
                         }
-                        if (crimeuserposx != 0 || crimeuserposy != 0)
+                        if (bCrimeUserPosX != 0 || bCrimeUserPosY != 0)
                         {
-                            posx = crimeuserposx;
-                            posy1 = crimeuserposy;
+                            posx = bCrimeUserPosX;
+                            posy1 = bCrimeUserPosY;
                             posy2 = posy1 + 200;
                         }
 
