@@ -3,6 +3,7 @@ void OpenScreen_Log_Union();
 void OnDamage_Union(oSDamageDescriptor&);
 int IsAIState_Union(int);
 void AI_PlayAni_Union(const zSTRING&);
+void AI_PlaySoundFromVob(zSTRING sound, zCVob* vob);
 int GetAivar_Union(const zSTRING& aivar);
 void SetAivar_Union(const zSTRING& aivar, int value);
 int GetTalent_Union(const zSTRING& talent);

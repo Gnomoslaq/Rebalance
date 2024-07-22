@@ -16,4 +16,9 @@ namespace GOTHIC_NAMESPACE
 		}
 		delete[] buffer;
 	}
+
+	void resetStaminaBar()
+	{
+		screen->RemoveItem(staminaBar);
+	}
 }

@@ -10,3 +10,4 @@
 #include "externalFunctions.hpp"
 #include "utils.hpp"
 #include "statusBar.hpp"
+#include "gameQoL.hpp"

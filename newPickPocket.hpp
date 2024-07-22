@@ -139,6 +139,21 @@ namespace GOTHIC_NAMESPACE
 		this->GetEM()->OnMessage(msgPlayAni, this);
 	}
 
+	void oCNpc::AI_PlaySoundFromVob(zSTRING sound, zCVob* vob)
+	{
+		oCMsgConversation* msg = nullptr;
+
+		msg = new oCMsgConversation(oCMsgConversation::EV_SNDPLAY, sound);
+
+		msg->f_yes = true;
+
+		msg->target = vob;
+
+		GetEM(false)->OnMessage(msg, this);
+
+		return;
+	}
+
 	//bool bShowPickPocket, PickPocketAmbientNPCs, bPickPocketSneakRequired, GiveAmbientXP;
 
 	static bool forcetrue = false;
@@ -311,7 +326,7 @@ namespace GOTHIC_NAMESPACE
 				}
 
 				player->AI_PlayAni_Union(zSTRING{ "T_STEAL" });
-
+				//player->AI_PlaySoundFromVob(zSTRING{ "Geldbeutel" }, npc);
 				{
 					auto idx = parser->GetIndex(info->name + "_DOIT");
 					if (idx != -1)

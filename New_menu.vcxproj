@@ -443,6 +443,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externalFunctions.hpp" />
+    <ClInclude Include="gameQoL.hpp" />
     <ClInclude Include="Headers.h" />
     <ClInclude Include="KeyCodes.hpp" />
     <ClInclude Include="GameEvents.hpp" />
@@ -1083,9 +1084,6 @@
     <None Include="Gothic_UserAPI\zVEC2.inl" />
     <None Include="Gothic_UserAPI\zVEC3.inl" />
     <None Include="Gothic_UserAPI\zVEC4.inl" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="staryhook.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

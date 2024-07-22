@@ -21,6 +21,7 @@
 		prayMessage = std::make_unique<PrayMessage>();
 		newSprint = std::make_unique<NewSprint>();
 		newPickPocket = std::make_unique<NewPickPocket>();
+		qol = std::make_unique<QoL>();
 
 		newStatusMenu->UpdateStatusMenu();
 		UpdatePluginSettings();
@@ -47,7 +48,7 @@
 		newSprint->SprintTick();
 		statusBar->Loop();
 		newPickPocket->Loop();
-
+		qol->Loop();
 		if (!ogame->GetShowPlayerStatus())
 		{
 			statusBar->ClearValue();
@@ -71,6 +72,7 @@
 		newSprint.release();
 		statusBar.release();
 		prayMessage.release();
+		newPickPocket.release();
 	}
 
 	void Game_Pause()
@@ -92,12 +94,12 @@
 
 	void Game_SaveBegin()
 	{
-
+		resetStaminaBar();
 	}
 
 	void Game_SaveEnd()
 	{
-
+		newSprint->ResetSprint();
 	}
 
 	void Game_LoadBegin_NewGame()

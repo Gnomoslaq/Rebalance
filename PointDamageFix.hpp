@@ -23,7 +23,7 @@ namespace GOTHIC_NAMESPACE
 				}
 			}
 		}
-		(this->*Hook_oCNpc_OnDamage_Union)(descDamage);
+		(this->*Hook_oCNpc_OnDamage_Union)(descDamage);		
 	}
 	
 	/*	auto Hook_oCNpc_OnDamage_Union = ::Union::CreateHook(reinterpret_cast<void*>(0x006660E0), &oCNpc::OnDamage_Union);

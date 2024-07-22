@@ -24,7 +24,6 @@ namespace GOTHIC_NAMESPACE
 
 			pStatusTexture->SetSize(screen->anx(MenuSizeX), screen->any(MenuSizeY));
 			pStatusTexture->SetPos((SCREEN_MAX - screen->anx(MenuSizeX)) / 2, (SCREEN_MAX - screen->any(MenuSizeY)) / 2);
-
 			// page 2
 			pStatusTexture2->SetFont("FONT_OLD_10_WHITE.TGA");
 			pStatusTexture2->SetFontColor(zCOLOR(255, 255, 255, 255));
@@ -57,7 +56,10 @@ namespace GOTHIC_NAMESPACE
 		{
 			MenuActive = false;
 			ogame->Unpause();
-			ogame->SetShowPlayerStatus(true);
+			if (oCInformationManager::GetInformationManager().HasFinished())
+			{
+				ogame->SetShowPlayerStatus(true);
+			}
 			//player->ToggleFocusVob(true);
 			HandleResultString(resultStr);
 
@@ -120,6 +122,7 @@ namespace GOTHIC_NAMESPACE
 			auto player_circle = player->GetTalentSkill(7);
 			auto player_exp = player->experience_points;
 			auto player_exp_next = player->experience_points_next_level;
+			int player_exp_next_lvl = player_exp_next - player_exp;
 			auto player_lp = player->learn_points;
 
 			auto atr_str = player->GetAttribute(NPC_ATR_STRENGTH);
@@ -204,9 +207,12 @@ namespace GOTHIC_NAMESPACE
 			pStatusTexture->Print(STAT_A_X2, STAT_PLY_Y + (STAT_DY * 2), player_exp);
 			pStatusTexture->Print(STAT_A_X1, STAT_PLY_Y + (STAT_DY * 3), MENU_ITEM_LEVEL_NEXT_TITLE);
 			pStatusTexture->Print(STAT_A_X2, STAT_PLY_Y + (STAT_DY * 3), player_exp_next);
+			// XP to next lvl
+			pStatusTexture->Print(STAT_A_X1, STAT_PLY_Y + (STAT_DY * 4), MENU_ITEM_EXP_NEXT_LEVEL_TITLE);
+			pStatusTexture->Print(STAT_A_X2, STAT_PLY_Y + (STAT_DY * 4), player_exp_next_lvl);
 			// LP
-			pStatusTexture->Print(STAT_A_X1, STAT_PLY_Y + (STAT_DY * 4), MENU_ITEM_LEARN_TITLE);
-			pStatusTexture->Print(STAT_A_X2, STAT_PLY_Y + (STAT_DY * 4), player_lp);
+			pStatusTexture->Print(STAT_A_X1, STAT_PLY_Y + (STAT_DY * 5), MENU_ITEM_LEARN_TITLE);
+			pStatusTexture->Print(STAT_A_X2, STAT_PLY_Y + (STAT_DY * 5), player_lp);
 			// Attribute
 			pStatusTexture->Print((STAT_A_X4 - STAT_A_X1) / 2, STAT_ATRHEAD_Y, MENU_ITEM_ATTRIBUTE_HEADING);
 			// Strength
@@ -333,17 +339,19 @@ namespace GOTHIC_NAMESPACE
 			{
 				pStatusTexture->Print(STAT_B_X2, STAT_TAL_Y + (STAT_DY * 6), MENU_ITEM_TALENT_YES);
 			}
+
 			// Pickpocket
 			pStatusTexture->Print(STAT_B_X1, STAT_TAL_Y + (STAT_DY * 7), MENU_ITEM_TALENT_6_TITLE);
-			if (pickpocketenum == 0)
+			if (atr_pickpocket->single_intdata == 0)
 			{
 				pStatusTexture->Print(STAT_B_X2, STAT_TAL_Y + (STAT_DY * 7), MENU_ITEM_TALENT_NO);
 			}
-			if (pickpocketenum == 1)
+			if (atr_pickpocket->single_intdata >= 1)
 			{
 				pStatusTexture->Print(STAT_B_X2, STAT_TAL_Y + (STAT_DY * 7), MENU_ITEM_TALENT_YES);
-			}		
 				pStatusTexture->Print(STAT_B_X3, STAT_TAL_Y + (STAT_DY * 7), atr_pickpocket->single_intdata);
+			}		
+
 
 			// Lockpicking
 			pStatusTexture->Print(STAT_B_X1, STAT_TAL_Y + (STAT_DY * 8), MENU_ITEM_TALENT_7p_TITLE);
@@ -911,6 +919,7 @@ zSTRING MENU_ITEM_TALENT_7_TITLE = "Magia";
 zSTRING MENU_ITEM_TALENT_7_CIRCLE = "Kr¹g";
 zSTRING MENU_ITEM_EXP_TITLE = "Doœwiadczenie";
 zSTRING MENU_ITEM_LEVEL_NEXT_TITLE = "Nast. Poziom";
+zSTRING MENU_ITEM_EXP_NEXT_LEVEL_TITLE = "Do nast. poziomu:";
 zSTRING MENU_ITEM_LEARN_TITLE = "Punkty Nauki";
 
 zSTRING MENU_ITEM_ATTRIBUTE_HEADING = "ATRYBUTY";

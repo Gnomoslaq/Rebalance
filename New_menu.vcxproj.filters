@@ -66,6 +66,9 @@
     <ClInclude Include="options.hpp">
       <Filter>Plugin</Filter>
     </ClInclude>
+    <ClInclude Include="gameQoL.hpp">
+      <Filter>Plugin</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Gothic_UserAPI\CGameManager.inl">
@@ -1940,10 +1943,5 @@
     <None Include="Gothic_UserAPI\zVEC4.inl">
       <Filter>Gothic_UserAPI</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="staryhook.txt">
-      <Filter>Plugin</Filter>
-    </Text>
   </ItemGroup>
 </Project>

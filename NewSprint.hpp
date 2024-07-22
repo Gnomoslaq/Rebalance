@@ -6,6 +6,7 @@ namespace GOTHIC_NAMESPACE
     public:
         ~NewSprint() {}
         zCArray<unsigned short> sprintkeys;
+
         void Loop()
         {
             auto stamina = parser->GetSymbol("ATR_STAMINA");
@@ -29,7 +30,7 @@ namespace GOTHIC_NAMESPACE
                 player->RemoveOverlay("HUMANS_SPRINT.mds");
             }
         }
-        float timer;
+
         void SprintTick()
         {
             auto stamina = parser->GetSymbol("ATR_STAMINA");
@@ -45,7 +46,7 @@ namespace GOTHIC_NAMESPACE
 
             timer -= 1000.0f;
 
-            if (SprintActive && stamina->single_intdata > 0)
+            if (SprintActive && stamina->single_intdata > 0 && player->GetBodyState() == BS_RUN)
             {
                 int StaminaTick = 5;
 
@@ -60,8 +61,6 @@ namespace GOTHIC_NAMESPACE
             }
         }
 
-    public:
-        // float timer;
         bool IsSprintBindToggled()
         {
             for (int i = 0; i < sprintkeys.GetNumInList(); i++)
@@ -74,10 +73,6 @@ namespace GOTHIC_NAMESPACE
 
             return false;
         }
-
-
-
-    public:
 
         void KeyInput()
         {
@@ -118,8 +113,17 @@ namespace GOTHIC_NAMESPACE
             return true;
         }
 
-    public:
+        void ResetSprint()
+        {
+            if (this->SprintActive)
+            {
+                this->SprintActive = !this->SprintActive;
+                player->RemoveOverlay("HUMANS_SPRINT.mds");
+            }
+        }
 
+    public:
+        float timer;
         zCTimer TimerAni;
         //zCModelAni* RunAni = GetModel()->GetAniFromAniID(anictrl->s_runl[fmode]);
 
